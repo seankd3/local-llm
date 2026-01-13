@@ -1,0 +1,60 @@
+# Local LLM Configuration
+
+model:
+  # Base model from HuggingFace
+  name: "Qwen/Qwen2.5-3B-Instruct"
+  # Quantization settings
+  load_in_4bit: true
+  bnb_4bit_compute_dtype: "float16"
+  bnb_4bit_quant_type: "nf4"
+  # Device settings
+  device_map: "auto"
+
+lora:
+  # LoRA hyperparameters
+  r: 16
+  lora_alpha: 32
+  target_modules:
+    - "q_proj"
+    - "k_proj"
+    - "v_proj"
+    - "o_proj"
+    - "gate_proj"
+    - "up_proj"
+    - "down_proj"
+  lora_dropout: 0.05
+  bias: "none"
+  task_type: "CAUSAL_LM"
+
+training:
+  # Training settings
+  learning_rate: 2.0e-4
+  batch_size: 1
+  gradient_accumulation_steps: 4
+  max_steps: 100
+  warmup_steps: 10
+  # Buffer thresholds
+  min_buffer_size: 10
+  max_buffer_size: 1000
+  # DPO settings
+  dpo_beta: 0.1
+  # Checkpointing
+  save_steps: 50
+
+rag:
+  # ChromaDB settings
+  collection_name: "knowledge_base"
+  persist_directory: "data/chromadb"
+  # Embedding model
+  embedding_model: "all-MiniLM-L6-v2"
+  # Retrieval settings
+  top_k: 5
+  chunk_size: 512
+  chunk_overlap: 50
+
+paths:
+  # Data directories
+  experiences: "data/experiences"
+  documents: "data/documents"
+  adapters: "models/adapters"
+  base_model_cache: "models/base"

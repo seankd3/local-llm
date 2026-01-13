@@ -1,0 +1,54 @@
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+.eggs/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Data directories (too large for git)
+data/chromadb/
+data/experiences/
+data/documents/
+models/base/
+models/adapters/
+
+# Keep directory structure
+!data/.gitkeep
+!models/.gitkeep
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# HuggingFace cache
+*.bin
+*.safetensors
+*.h5
+*.ckpt
+*.pt
+!requirements.txt
